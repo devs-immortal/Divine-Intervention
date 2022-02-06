@@ -12,7 +12,6 @@ import java.util.Set;
 @SupportedAnnotationTypes({})
 public final class AnnotationProcessorHook extends AbstractProcessor {
     public AnnotationProcessorHook() {
-        System.out.println("a");
         Init.init();
     }
 

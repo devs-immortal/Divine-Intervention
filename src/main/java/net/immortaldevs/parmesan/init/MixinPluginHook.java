@@ -10,7 +10,6 @@ import java.util.Set;
 public final class MixinPluginHook implements IMixinConfigPlugin {
     @Override
     public void onLoad(String mixinPackage) {
-        System.out.println("e");
         Init.init();
     }
 
