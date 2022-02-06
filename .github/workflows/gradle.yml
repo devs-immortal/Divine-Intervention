@@ -24,7 +24,7 @@ jobs:
         id: version
         with:
           path: gradle.properties
-          property: parmesan_version
+          property: divine_intervention_version
       - name: Check if tag exists
         uses: mukunku/tag-exists-action@v1.0.0
         id: checkTag
