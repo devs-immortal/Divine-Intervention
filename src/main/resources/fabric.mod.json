@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "parmesan",
+  "version": "${version}",
+
+  "name": "Permesan",
+  "description": "Haha mixin go brrrrr",
+  "authors": [
+    "SollyW"
+  ],
+
+  "license": "CC0",
+
+  "environment": "*",
+
+  "mixins": [
+    "parmesan.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": "*",
+    "java": ">=17"
+  }
+}
