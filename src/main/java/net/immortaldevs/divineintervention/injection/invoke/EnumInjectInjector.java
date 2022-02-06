@@ -1,0 +1,60 @@
+package net.immortaldevs.divineintervention.injection.invoke;
+
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.tree.*;
+import org.spongepowered.asm.mixin.injection.code.Injector;
+import org.spongepowered.asm.mixin.injection.struct.InjectionInfo;
+import org.spongepowered.asm.mixin.injection.struct.InjectionNodes;
+import org.spongepowered.asm.mixin.injection.struct.Target;
+
+import java.util.Arrays;
+
+public class EnumInjectInjector extends Injector {
+    private final String name;
+
+    public EnumInjectInjector(InjectionInfo info, String name) {
+        super(info, "@EnumInject");
+        this.name = name;
+    }
+
+    // todo validation
+    @Override
+    protected void inject(Target target, InjectionNodes.InjectionNode node) {
+        InsnList injectedInsns = new InsnList();
+        injectedInsns.add(new InsnNode(Opcodes.DUP)); // array array
+        injectedInsns.add(new InsnNode(Opcodes.ARRAYLENGTH)); // array int
+        injectedInsns.add(new InsnNode(Opcodes.ICONST_1)); // array int int
+        injectedInsns.add(new InsnNode(Opcodes.IADD)); // array int
+        injectedInsns.add(new MethodInsnNode(Opcodes.INVOKESTATIC,
+                Type.getInternalName(Arrays.class),
+                "copyOf",
+                "([Ljava/lang/Object;I)[Ljava/lang/Object;",
+                false)); // array
+        injectedInsns.add(new TypeInsnNode(Opcodes.CHECKCAST, '[' + this.returnType.getDescriptor()));
+        injectedInsns.add(new InsnNode(Opcodes.DUP)); // array array
+        injectedInsns.add(new InsnNode(Opcodes.DUP)); // array array array
+        injectedInsns.add(new InsnNode(Opcodes.ARRAYLENGTH)); // array array int
+        injectedInsns.add(new InsnNode(Opcodes.ICONST_1)); // array array int int
+        injectedInsns.add(new InsnNode(Opcodes.ISUB)); // array array int
+        injectedInsns.add(new InsnNode(Opcodes.DUP)); // array array int int
+        this.invokeHandler(injectedInsns); // array array int enum
+        injectedInsns.add(new InsnNode(Opcodes.DUP_X2)); // array enum array int enum
+        injectedInsns.add(new InsnNode(Opcodes.AASTORE)); // array enum
+        injectedInsns.add(new FieldInsnNode(Opcodes.PUTSTATIC,
+                this.returnType.getInternalName(),
+                this.name,
+                this.returnType.getDescriptor())); // array.. we're back where we started!
+
+        target.extendStack().add(1).apply();
+        target.insns.insert(node.getCurrentTarget(), injectedInsns);
+
+        target.classNode.fields.add(new FieldNode(
+                Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL | Opcodes.ACC_STATIC | Opcodes.ACC_ENUM,
+                name,
+                this.returnType.getDescriptor(),
+                target.classNode.name + '.' + name + ':' + this.returnType.getDescriptor(),
+                null
+        ));
+    }
+}

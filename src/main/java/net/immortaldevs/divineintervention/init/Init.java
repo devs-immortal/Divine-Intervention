@@ -1,5 +1,6 @@
 package net.immortaldevs.divineintervention.init;
 
+import net.immortaldevs.divineintervention.injection.struct.EnumInjectInjectionInfo;
 import net.immortaldevs.divineintervention.injection.struct.ModifyOperandInjectionInfo;
 import org.spongepowered.asm.mixin.injection.struct.InjectionInfo;
 
@@ -11,5 +12,6 @@ public final class Init {
         initialised = true;
 
         InjectionInfo.register(ModifyOperandInjectionInfo.class);
+        InjectionInfo.register(EnumInjectInjectionInfo.class);
     }
 }

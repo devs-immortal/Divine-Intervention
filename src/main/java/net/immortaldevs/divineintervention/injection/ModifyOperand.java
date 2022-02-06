@@ -141,12 +141,4 @@ public @interface ModifyOperand {
      * @return Maximum allowed number of injections for this
      */
     int allow() default -1;
-
-    /**
-     * Returns constraints which must be validated for this injector to
-     * succeed. See {@link ConstraintParser.Constraint} for details of constraint formats.
-     *
-     * @return Constraints for this annotation
-     */
-    String constraints() default "";
 }

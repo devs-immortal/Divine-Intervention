@@ -8,9 +8,12 @@ import java.util.List;
 import java.util.Set;
 
 public final class MixinPluginHook implements IMixinConfigPlugin {
+    static {
+        Init.init();
+    }
+
     @Override
     public void onLoad(String mixinPackage) {
-        Init.init();
     }
 
     @Override
@@ -25,7 +28,6 @@ public final class MixinPluginHook implements IMixinConfigPlugin {
 
     @Override
     public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {
-
     }
 
     @Override
@@ -35,11 +37,9 @@ public final class MixinPluginHook implements IMixinConfigPlugin {
 
     @Override
     public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
-
     }
 
     @Override
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
-
     }
 }
