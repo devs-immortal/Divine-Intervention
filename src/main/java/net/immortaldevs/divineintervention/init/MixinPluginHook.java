@@ -1,4 +1,4 @@
-package net.immortaldevs.parmesan.init;
+package net.immortaldevs.divineintervention.init;
 
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;

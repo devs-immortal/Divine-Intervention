@@ -1,6 +1,6 @@
-package net.immortaldevs.parmesan.init;
+package net.immortaldevs.divineintervention.init;
 
-import net.immortaldevs.parmesan.injection.struct.GrabOperandInjectionInfo;
+import net.immortaldevs.divineintervention.injection.struct.ModifyOperandInjectionInfo;
 import org.spongepowered.asm.mixin.injection.struct.InjectionInfo;
 
 public final class Init {
@@ -10,6 +10,6 @@ public final class Init {
         if (initialised) return;
         initialised = true;
 
-        InjectionInfo.register(GrabOperandInjectionInfo.class);
+        InjectionInfo.register(ModifyOperandInjectionInfo.class);
     }
 }

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "parmesan",
+  "id": "divine_intervention",
   "version": "${version}",
 
-  "name": "Permesan",
+  "name": "Divine Intervention",
   "description": "Haha mixin go brrrrr",
   "authors": [
     "SollyW"
@@ -14,7 +14,7 @@
   "environment": "*",
 
   "mixins": [
-    "parmesan.mixins.json"
+    "divine_intervention.mixins.json"
   ],
 
   "depends": {

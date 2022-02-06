@@ -1,4 +1,4 @@
-package net.immortaldevs.parmesan.injection.invoke;
+package net.immortaldevs.divineintervention.injection.invoke;
 
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.*;
@@ -8,15 +8,13 @@ import org.spongepowered.asm.mixin.injection.struct.InjectionNodes.InjectionNode
 import org.spongepowered.asm.mixin.injection.struct.Target;
 import org.spongepowered.asm.mixin.injection.struct.Target.Extension;
 
-public class GrabOperandInjector extends Injector {
-    public GrabOperandInjector(InjectionInfo info) {
-        super(info, "@GrabOperand");
+public class ModifyOperandInjector extends Injector {
+    public ModifyOperandInjector(InjectionInfo info) {
+        super(info, "@ModifyOperand");
     }
 
     @Override
     protected void inject(Target target, InjectionNode node) {
-        System.out.println(target.method.name);
-
         InjectorData handler = new InjectorData(target);
         this.validateParams(handler, this.returnType, this.returnType);
 

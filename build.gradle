@@ -8,8 +8,8 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
-archivesBaseName = "parmesan"
-version = project.parmesan_version
+archivesBaseName = "divine-intervention"
+version = project.divine_intervention_version
 group = "net.immortaldevs"
 
 dependencies {

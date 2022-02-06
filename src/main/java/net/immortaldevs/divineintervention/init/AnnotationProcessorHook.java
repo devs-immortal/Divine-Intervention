@@ -1,4 +1,4 @@
-package net.immortaldevs.parmesan.init;
+package net.immortaldevs.divineintervention.init;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;

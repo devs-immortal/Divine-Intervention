@@ -1,4 +1,4 @@
-package net.immortaldevs.parmesan.injection;
+package net.immortaldevs.divineintervention.injection;
 
 import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,8 +21,8 @@ import java.lang.annotation.Target;
  * receive the topmost word on the operand stack, and will leave
  * its return value in its place.
  *
- * <p><tt>GrabOperand</tt> callbacks should always take one argument of the
- * type to capture and return the same type. For example a <tt>GrabOperand
+ * <p><tt>ModifyOperand</tt> callbacks should always take one argument of the
+ * type to capture and return the same type. For example a <tt>ModifyOperand
  * </tt> for an operand of type <ins>{@link String}</ins> should have the
  * signature:</p>
  *
@@ -38,7 +38,7 @@ import java.lang.annotation.Target;
 @SuppressWarnings("unused")
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface GrabOperand {
+public @interface ModifyOperand {
     /**
      * String representation of one or more
      * {@link ITargetSelector target selectors} which identify the target
@@ -67,8 +67,8 @@ public @interface GrabOperand {
 
     /**
      * By default, the annotation processor will attempt to locate an
-     * obfuscation mapping for all {@link GrabOperand} methods since it is
-     * anticipated that in general the target of a {@link GrabOperand}
+     * obfuscation mapping for all {@link ModifyOperand} methods since it is
+     * anticipated that in general the target of a {@link ModifyOperand}
      * annotation will be an obfuscated method in the target class. However
      * since it is possible to also apply mixins to non-obfuscated targets (or
      * non- obfuscated methods in obfuscated targets, such as methods added by
