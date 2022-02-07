@@ -7,6 +7,8 @@ import org.spongepowered.asm.mixin.injection.code.Injector;
 import org.spongepowered.asm.mixin.injection.struct.InjectionInfo;
 import org.spongepowered.asm.mixin.injection.struct.InjectionNodes;
 import org.spongepowered.asm.mixin.injection.struct.Target;
+import org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException;
+import org.spongepowered.asm.util.Constants;
 
 import java.util.Arrays;
 
@@ -18,9 +20,25 @@ public class EnumInjectInjector extends Injector {
         this.name = name;
     }
 
-    // todo validation
     @Override
     protected void inject(Target target, InjectionNodes.InjectionNode node) {
+        if (this.methodArgs.length != 1) {
+            throw new InvalidInjectionException(this.info, "args length");
+        }
+
+        if (!Type.INT_TYPE.equals(this.methodArgs[0])) {
+            throw new InvalidInjectionException(this.info, "arg not int");
+        }
+
+        if (!(node.getOriginalTarget() instanceof MethodInsnNode methodInsnNode)
+                || !methodInsnNode.desc.endsWith('[' + this.returnType.getDescriptor())) {
+            throw new InvalidInjectionException(this.info, "not array");
+        }
+
+        if (!Constants.CLINIT.equals(target.method.name)) {
+            throw new InvalidInjectionException(this.info, "not clinit");
+        }
+
         InsnList injectedInsns = new InsnList();
         injectedInsns.add(new InsnNode(Opcodes.DUP)); // array array
         injectedInsns.add(new InsnNode(Opcodes.ARRAYLENGTH)); // array int
@@ -31,7 +49,8 @@ public class EnumInjectInjector extends Injector {
                 "copyOf",
                 "([Ljava/lang/Object;I)[Ljava/lang/Object;",
                 false)); // array
-        injectedInsns.add(new TypeInsnNode(Opcodes.CHECKCAST, '[' + this.returnType.getDescriptor()));
+        injectedInsns.add(new TypeInsnNode(Opcodes.CHECKCAST,
+                '[' + this.returnType.getDescriptor())); // array
         injectedInsns.add(new InsnNode(Opcodes.DUP)); // array array
         injectedInsns.add(new InsnNode(Opcodes.DUP)); // array array array
         injectedInsns.add(new InsnNode(Opcodes.ARRAYLENGTH)); // array array int
@@ -49,6 +68,7 @@ public class EnumInjectInjector extends Injector {
         target.extendStack().add(1).apply();
         target.insns.insert(node.getCurrentTarget(), injectedInsns);
 
+        // todo do I really need this?
         target.classNode.fields.add(new FieldNode(
                 Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL | Opcodes.ACC_STATIC | Opcodes.ACC_ENUM,
                 name,
