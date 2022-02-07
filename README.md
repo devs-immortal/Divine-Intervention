@@ -18,12 +18,12 @@ repositories {
 }
 
 dependencies {
-    modImplementation "com.github.devs-immortal:Divine-Intervention:${project.divine_intervention_version}"
+    modImplementation include("com.github.devs-immortal:Divine-Intervention:${project.divine_intervention_version}")
     annotationProcessor "com.github.devs-immortal:Divine-Intervention:${project.divine_intervention_version}"
 }
 ```
 gradle.properties:
 ```properties
 # Dependencies
-	divine_intervention_version = 0.2.2
+	divine_intervention_version = 0.2.3
 ```
