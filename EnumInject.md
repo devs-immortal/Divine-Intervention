@@ -14,4 +14,5 @@ public abstract class BoatEntityTypeMixin {
     private static BoatEntity.Type createOrange(int ordinal) {
         return callInit("STONE", 4, Blocks.STONE, "stone");
     }
-}```
+}
+```
