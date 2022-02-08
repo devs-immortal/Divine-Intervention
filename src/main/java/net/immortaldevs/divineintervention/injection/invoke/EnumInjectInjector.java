@@ -23,20 +23,20 @@ public class EnumInjectInjector extends Injector {
     @Override
     protected void inject(Target target, InjectionNodes.InjectionNode node) {
         if (this.methodArgs.length != 1) {
-            throw new InvalidInjectionException(this.info, "args length");
+            throw new InvalidInjectionException(this.info, "Wrong number of arguments. Expected 1, found " + this.methodArgs.length);
         }
 
         if (!Type.INT_TYPE.equals(this.methodArgs[0])) {
-            throw new InvalidInjectionException(this.info, "arg not int");
+            throw new InvalidInjectionException(this.info, "Wrong type for argument 0. Expected int, found " + this.methodArgs[0].getClassName());
         }
 
         if (!(node.getOriginalTarget() instanceof MethodInsnNode methodInsnNode)
                 || !methodInsnNode.desc.endsWith('[' + this.returnType.getDescriptor())) {
-            throw new InvalidInjectionException(this.info, "not array");
+            throw new InvalidInjectionException(this.info, "Injection must take place after an invoke insn which returns an array of enums");
         }
 
         if (!Constants.CLINIT.equals(target.method.name)) {
-            throw new InvalidInjectionException(this.info, "not clinit");
+            throw new InvalidInjectionException(this.info, "Injection must take place inside the <clinit> method");
         }
 
         InsnList injectedInsns = new InsnList();
