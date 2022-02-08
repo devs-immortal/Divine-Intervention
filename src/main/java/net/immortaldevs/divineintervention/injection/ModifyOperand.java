@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.selectors.ITargetSelector;
 import org.spongepowered.asm.mixin.injection.throwables.InjectionError;
 import org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException;
-import org.spongepowered.asm.util.ConstraintParser;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
