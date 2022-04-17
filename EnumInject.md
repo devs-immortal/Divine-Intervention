@@ -12,7 +12,7 @@ public abstract class BoatEntityTypeMixin {
             at = @At(value = "INVOKE",
                     target = "net/minecraft/entity/vehicle/BoatEntity$Type.method_36671()[Lnet/minecraft/entity/vehicle/BoatEntity$Type;"))
     private static BoatEntity.Type createStone(int ordinal) {
-        return callInit("STONE", 4, Blocks.STONE, "stone");
+        return callInit("STONE", ordinal, Blocks.STONE, "stone");
     }
 }
 ```
