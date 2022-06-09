@@ -28,5 +28,5 @@ dependencies {
 gradle.properties:
 ```properties
 # Dependencies
-	divine_intervention_version = 0.2.4
+	divine_intervention_version = 1.0.0
 ```
