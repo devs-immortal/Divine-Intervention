@@ -2,6 +2,7 @@ package net.immortaldevs.divineintervention.injection.struct;
 
 import net.immortaldevs.divineintervention.injection.CustomInject;
 import net.immortaldevs.divineintervention.injection.CustomInjector;
+import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AnnotationNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.spongepowered.asm.mixin.injection.code.Injector;
@@ -20,8 +21,11 @@ public class CustomInjectInjectionInfo extends InjectionInfo {
     @Override
     protected Injector parseInjector(AnnotationNode injectAnnotation) {
         try {
-            Class<? extends CustomInjector> injector = Annotations.getValue(injectAnnotation, "injector");
-            return injector.getConstructor(InjectionInfo.class).newInstance(this);
+            return (CustomInjector) Class.forName(Annotations.<Type>getValue(injectAnnotation, "injector")
+                            .getInternalName()
+                            .replace('/', '.'))
+                    .getConstructor(InjectionInfo.class)
+                    .newInstance(this);
         } catch (Exception e) {
             throw new InvalidInjectionException(this, e);
         }
