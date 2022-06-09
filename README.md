@@ -10,6 +10,9 @@ handler method's return value.
 ### EnumInject
 A slightly weird injector that adds a constant to an enum. See [EnumInject.md](EnumInject.md) for an example.
 
+### CustomInject
+A quick way of using asm to do whatever you want to do. If you don't know how to use it, you probably shouldn't.
+
 ## Installation
 build.gradle:
 ```groovy
