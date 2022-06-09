@@ -5,14 +5,12 @@
 
   "name": "Divine Intervention",
   "description": "Haha mixin go brrrrr",
+  "license": "CC0",
   "authors": [
     "SollyW"
   ],
 
-  "license": "CC0",
-
   "environment": "*",
-
   "mixins": [
     "divine_intervention.mixins.json"
   ],
