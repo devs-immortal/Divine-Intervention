@@ -24,7 +24,7 @@ jobs:
         id: version
         with:
           path: gradle.properties
-          property: divine_intervention_version
+          property: divineInterventionVersion
       - name: Create tag
         uses: actions/github-script@v5
         continue-on-error: true
