@@ -1,10 +1,7 @@
 package net.immortaldevs.divineintervention.injection;
 
 import org.spongepowered.asm.mixin.MixinEnvironment;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Group;
-import org.spongepowered.asm.mixin.injection.InjectionPoint;
-import org.spongepowered.asm.mixin.injection.Slice;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.selectors.ITargetSelector;
 import org.spongepowered.asm.mixin.injection.throwables.InjectionError;
 import org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException;
@@ -63,6 +60,16 @@ public @interface ModifyOperand {
      * @return injection point specifiers for this injector
      */
     At[] at();
+
+    /**
+     * Specifies the local variable indices for this injector to capture.
+     *
+     * <p>When capturing local variables, the variables are appended after
+     * the captured operand and before target method arguments.</p>
+     *
+     * @return the desired locals to capture
+     */
+    int[] locals() default {};
 
     /**
      * By default, the annotation processor will attempt to locate an

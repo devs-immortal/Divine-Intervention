@@ -7,6 +7,7 @@ import org.objectweb.asm.tree.MethodNode;
 import org.spongepowered.asm.mixin.injection.code.Injector;
 import org.spongepowered.asm.mixin.injection.struct.InjectionInfo;
 import org.spongepowered.asm.mixin.transformer.MixinTargetContext;
+import org.spongepowered.asm.util.Annotations;
 
 @InjectionInfo.AnnotationType(ModifyOperand.class)
 @InjectionInfo.HandlerPrefix("operand")
@@ -17,7 +18,7 @@ public class ModifyOperandInjectionInfo extends InjectionInfo {
 
     @Override
     protected Injector parseInjector(AnnotationNode injectAnnotation) {
-        return new ModifyOperandInjector(this);
+        return new ModifyOperandInjector(this, Annotations.getValue(injectAnnotation, "locals"));
     }
 
     @Override
