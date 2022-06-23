@@ -47,7 +47,7 @@ repositories {
 
 dependencies {
     modImplementation(
-            group = "net.immortaldevs",
+            group = "com.github.devs-immortal",
             name = "Divine-Intervention",
             version = divineInterventionVersion,
     ).also(::annotationProcessor).also(::include)
