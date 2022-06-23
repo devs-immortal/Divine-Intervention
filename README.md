@@ -14,19 +14,46 @@ A slightly weird injector that adds a constant to an enum. See [EnumInject.md](E
 A quick way of using asm to do whatever you want to do. If you don't know how to use it, you probably shouldn't.
 
 ## Installation
+### Groovy
 build.gradle:
 ```groovy
 repositories {
-    maven { url 'https://jitpack.io' }
+    maven {
+        name = "Jitpack"
+        url = "https://jitpack.io"
+    }
 }
 
 dependencies {
-    modImplementation include("com.github.devs-immortal:Divine-Intervention:${project.divine_intervention_version}")
-    annotationProcessor "com.github.devs-immortal:Divine-Intervention:${project.divine_intervention_version}"
+    modImplementation annotationProcessor(include("com.github.devs-immortal:Divine-Intervention:${project.divine_intervention_version}"))
 }
 ```
 gradle.properties:
 ```properties
-# Dependencies
-	divine_intervention_version = 1.0.0
+divine_intervention_version = 2.0.0
+```
+
+### Kotlin
+build.gradle.kts:
+```kotlin
+val divineInterventionVersion: String by properties
+
+repositories {
+    maven {
+        name = "Jitpack"
+        url = uri("https://jitpack.io")
+    }
+}
+
+dependencies {
+    modImplementation(
+            group = "net.immortaldevs",
+            name = "Divine-Intervention",
+            version = divineInterventionVersion,
+    ).also(::annotationProcessor).also(::include)
+}
+```
+gradle.properties:
+```properties
+divineInterventionVersion = 2.0.0
 ```
